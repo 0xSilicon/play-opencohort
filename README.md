@@ -32,6 +32,13 @@ node src/${script}
 ```
 
 ## Methods Description
+### Mint Cohort
+Script for minting a cohort item.
+To execute this script, ETH is required to cover the gas fees.
+CohortType
+- 1: Address
+- 2: Identity
+------------------------------
 ### Add member
 Add an address to a specific cohort. If the address is already a member, only the weight will be updated.
 - path: `/cohort/${cohortId}/member/add`
@@ -260,7 +267,7 @@ const signingHash = makeEthereumSignedHash(dataHash);
 		"timestamp":1718266039, // snapshot time (For rollup, return the value exactly as requested in the request)
 		"prover":"https://api-cohort.silicon.network",
 		"totalWeight":10000000,
-		"nonce":1, // 첫 snapshot은 1부터 시작
+		"nonce":1, // snapshot nonce
 	}
 
   // Timeout for executing submitSnapshot.
@@ -270,9 +277,9 @@ const signingHash = makeEthereumSignedHash(dataHash);
 }
 ```
 ---------------------------
-### Submit Snapshot
+### Submit Snapshot
 Receive the signature for the snapshot awaiting signature through prepare, finalize the snapshot data, and also store the Rollup data.
-- path: `/cohort/{cohortId}/snapshot/submit`
+- path: `/cohort/{cohortId}/snapshot/submit`
 - method: `POST`
 - request body example
 ```
