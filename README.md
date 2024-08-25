@@ -15,12 +15,16 @@ OpenCohort is a separate closely integrated with Silicon that categorizes users 
 ```
 cp .env.example .env
 ```
-2. Fill `.env` with PRIVATEKEY, SILICON, OPENCOHORT, COHORT_ADDRESS
+2. Fill `.env` with PRIVATEKEY, SILICON, OPENCOHORT
 ```
 PRIVATEKEY: private key for cohort managing
-SILICON: silicon endpoint ( TBD )
-OPENCOHORT: OpenCohort endpoint ( https://api-cohort.silicon.network )
-COHORT_ADDRESS: cohort contract address ( TBD )
+(ex, PRIVATEKEY=0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff )
+
+SILICON: silicon endpoint
+(mainnet: https://rpc.silicon.network, testnet: https://rpc-sepolia.silicon.network )
+
+OPENCOHORT: OpenCohort endpoint
+( https://api-cohort.silicon.network )
 ```
 3. Install package
 ```

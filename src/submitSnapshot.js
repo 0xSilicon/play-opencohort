@@ -21,8 +21,7 @@ require("dotenv").config();
     }
     /////////////////////////////////////////
 
-    const cohortConfig = JSON.parse(await request.get(`${api}/cohort/config`)).data;
-
+    const cohortConfig = JSON.parse(await request.get(`${openCohort}/cohort/config`)).data;
 
     const rollupHash = utils.makeRollupHash({
         cohort: cohortConfig.cohort,
@@ -33,7 +32,7 @@ require("dotenv").config();
         totalWeight: dto.totalWeight,
         totalCount: dto.totalCount,
         prover: dto.prover,
-        snapshotTime: dto.snapshotTime
+        snapshotTime: dto.timestamp
     });
     const signingRollupHash = utils.makeEthereumSignedHash(rollupHash);
     const rollupSignature = utils.signEC(privateKey, signingRollupHash);
@@ -52,7 +51,7 @@ require("dotenv").config();
     const signature = utils.signEC(privateKey, signingHash);
 
     let res = await request({
-        url: `${api}/cohort/${cohortId}/snapshot/submit`,
+        url: `${openCohort}/cohort/${cohortId}/snapshot/submit`,
         method: 'POST',
         body: {
             validUntil: validUntil,

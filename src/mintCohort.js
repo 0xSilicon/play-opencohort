@@ -1,5 +1,6 @@
 const Utils = require('../lib/utils');
 const utils = new Utils();
+const request = require('request-promise');
 
 require("dotenv").config();
 
@@ -9,13 +10,15 @@ const Web3 = require('web3');
     const privateKey = process.env.PRIVATEKEY;
     const silicon = process.env.SILICON;
     const openCohort = process.env.OPENCOHORT;
-    const cohortAddress = process.env.COHORT_ADDRESS;
 
     ////////////////////////////////////
     // CONFIG
     const cohortType = ""; // 1: Address, 2: Idenity
     const tokenURI = ""; // Base64 or url
     ////////////////////////////////////
+
+    const cohortConfig = JSON.parse(await request.get(`${openCohort}/cohort/config`)).data;
+    const cohortAddress = cohortConfig.cohort;
 
     const node = new Web3(silicon);
     const cohortABI = utils.getCohortABI();

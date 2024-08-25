@@ -1,10 +1,14 @@
 {
+  "engines" : {
+    "node" : ">=18.0.0"
+  },
   "dependencies": {
     "dotenv": "^16.4.5",
     "elliptic": "^6.5.6",
     "ethereumjs-util": "^7.1.5",
     "ethers": "5.7.2",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "request-promise": "^4.2.6",
+    "web3": "1.10.4"
   }
 }
