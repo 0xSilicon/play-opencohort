@@ -24,7 +24,7 @@ SILICON: silicon endpoint
 (mainnet: https://rpc.silicon.network, testnet: https://rpc-sepolia.silicon.network )
 
 OPENCOHORT: OpenCohort endpoint
-( https://api-cohort.silicon.network )
+( mainnet: https://api-cohort.silicon.network, testnet: TBD )
 ```
 3. Install package
 ```
