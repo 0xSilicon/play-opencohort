@@ -46,6 +46,21 @@ CohortType
 - 2: Identity
 ```
 ------------------------------
+### Set Cohort Grant
+Script for setting cohort config.
+To execute this script, ETH is required to cover the gas fees.
+
+```
+// The cohort item ID to set in the grant config
+const cohortId = "0"; 
+
+// The address to receive the grant reward
+const grantee = "0x0000000000000000000000000000000000000000";
+
+// MAX: 1000, DENOMINATOR: 10000 (ex, grantRate:100 -> 1% grant reward )
+const grantRate = "0";
+```
+------------------------------
 ### Add member
 Add an address to a specific cohort. If the address is already a member, only the weight will be updated.
 - path: `/cohort/${cohortId}/member/add`

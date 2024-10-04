@@ -181,6 +181,37 @@
                 "type": "uint256"
             },
             {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "rate",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "grantee",
+                        "type": "address"
+                    }
+                ],
+                "indexed": false,
+                "internalType": "struct GrantConfiguration.GrantConfig",
+                "name": "cohortGrant",
+                "type": "tuple"
+            }
+        ],
+        "name": "SetCohortGrant",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
                 "indexed": false,
                 "internalType": "uint256",
                 "name": "nonce",
@@ -301,8 +332,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -315,8 +345,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -329,8 +358,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -356,8 +384,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -406,8 +433,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -431,8 +457,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -463,8 +488,7 @@
         "name": "upgradeToAndCall",
         "outputs": [],
         "stateMutability": "payable",
-        "type": "function",
-        "payable": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -500,8 +524,7 @@
             }
         ],
         "stateMutability": "pure",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -520,8 +543,7 @@
             }
         ],
         "stateMutability": "pure",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -540,8 +562,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -554,8 +575,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -568,8 +588,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -593,8 +612,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -613,8 +631,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -633,8 +650,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -647,8 +663,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -661,8 +676,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -681,8 +695,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [],
@@ -695,8 +708,7 @@
             }
         ],
         "stateMutability": "pure",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -715,8 +727,64 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
+        ],
+        "name": "grant",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "rate",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "grantee",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct GrantConfiguration.GrantConfig",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "MAX_GRANT_RATE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "GRANT_RATE_DENOMINATOR",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
     },
     {
         "inputs": [
@@ -772,8 +840,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -792,8 +859,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -812,8 +878,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -874,8 +939,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -936,8 +1000,7 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     },
     {
         "inputs": [
@@ -1023,6 +1086,36 @@
             {
                 "components": [
                     {
+                        "internalType": "uint256",
+                        "name": "rate",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "grantee",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct GrantConfiguration.GrantConfig",
+                "name": "cohortGrant",
+                "type": "tuple"
+            }
+        ],
+        "name": "setCohortGrant",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
                         "internalType": "enum CohortConfiguration.CohortType",
                         "name": "cohortType",
                         "type": "uint8"
@@ -1089,7 +1182,6 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
+        "type": "function"
     }
 ]
