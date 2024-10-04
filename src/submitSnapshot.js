@@ -17,7 +17,7 @@ require("dotenv").config();
         totalWeight: "",
         totalCount: "",
         prover: 'https://api-cohort.silicon.network',
-        snapshotTime: ""
+        timestamp: ""
     }
     /////////////////////////////////////////
 
@@ -43,7 +43,7 @@ require("dotenv").config();
         cohort: cohortConfig.cohort,
         chainId: cohortConfig.chainId,
         cohortId: cohortId,
-        snapshotTime: dto.snapshotTime,
+        snapshotTime: dto.timestamp,
         snapshotSignature: rollupSignature.hex,
         validUntil: validUntil
     });
@@ -55,7 +55,7 @@ require("dotenv").config();
         method: 'POST',
         body: {
             validUntil: validUntil,
-            snapshotTime: dto.snapshotTime,
+            snapshotTime: dto.timestamp,
             snapshotSignature: rollupSignature.hex,
             signature: signature.hex
         },
