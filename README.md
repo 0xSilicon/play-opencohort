@@ -266,21 +266,23 @@ const signingHash = makeEthereumSignedHash(dataHash);
 - response ( Information used for submitSnapshot )
 ```
 {
-  "success":true,
-  "signatureInfo": {
-    "address": "0x0000000000000000000000000000000000000700",
-    "cohortId":{cohortId},
-    "merkleRoot":"0xd0e15e9b115375b9725e57604121792e871db3128dc0c5683601d8288f755930",
-    "timestamp":1718266039, // snapshot time (For rollup, return the value exactly as requested in the request)
-    "prover":"https://api-cohort.silicon.network",
-    "totalWeight":10000000,
-    "nonce":1, // snapshot nonce
-  }
+  statusCode: 200,
+  data: {
+    signatureInfo: {
+      "address": "0x0000000000000000000000000000000000000700",
+      "cohortId":{cohortId},
+      "merkleRoot":"0xd0e15e9b115375b9725e57604121792e871db3128dc0c5683601d8288f755930",
+      "timestamp":1718266039, // snapshot time (For rollup, return the value exactly as requested in the request)
+      "prover":"https://api-cohort.silicon.network",
+      "totalWeight":10000000,
+      "nonce":1, // snapshot nonce
+    },
 
-  // Timeout for executing submitSnapshot.
-  // After this time, submission with the given data will no longer be possible,
-  // and a new prepare request will be required.
-  "expiredAt":1718266099 
+    // Timeout for executing submitSnapshot.
+    // After this time, submission with the given data will no longer be possible,
+    // and a new prepare request will be required.
+    expiredAt: 1728021711
+  }
 }
 ```
 ---------------------------
