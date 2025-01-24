@@ -1,11 +1,45 @@
-# Play OpenCohort
+# Open Silicon Tutorials
 
 ![silicon-opencohort](https://github.com/user-attachments/assets/b3dd4cc5-6e11-48a3-be82-172e0dd712ae)
 
+- [**Overview**](#overview)
+- [**Information**](#information)
+- [**How to launch**](#how-to-launch)
+- [**Open Cohort Method**](#open-cohort-methods-description)
+    - Set Up Cohort (by Signer)
+        - [Mint Cohort](#mint-cohort)
+        - [Set Cohort Grant](#set-cohort-grant)
+    - Cohort Member Management (by Signer)
+        - [Add Member](#add-member)
+        - [Remove Member](#remove-member)
+    - Snapshot for Airdrop (by Signer)
+        - [Initialize Snapshot](#initialize-snapshot)
+        - [Prepare Snapshot](#prepare-snapshot)
+        - [Submit Snapshot](#submit-snapshot)
+    - etc.
+        - [Update Identity](#update-identity)
+- [**Named Wallet Method**](#named-wallet-methods-description)
+    - Deploy
+        - [Deploy Wallet](#deploy-wallet)
+    - Wallet Management
+        - [Add Property](#add-property)
+        - [Remove Property](#remove-property)
+        - [Change Info](#change-info)
+        - [Activate Wallet](#activate-wallet)
+    - Wallet Owner Example
+        - [Send Wallet Assets](#send-wallet-assets)
+    - [Functions Not Included in the Examples](#functions-not-included-in-the-examples)
+- [**Open Silicon Procotol Manager (Optional)**](#open-silicon-procotol-manager-optional)
+
+
 ## Overview
-OpenCohort is a separate closely integrated with Silicon that categorizes users to support business applications, manage Web3 communities, and enhance social interactions with like-minded individuals.
+ OpenCohort is a separate closely integrated with Silicon that categorizes users to support business applications, manage Web3 communities, and enhance social interactions with like-minded individuals.  
+
+This is a collection of **script examples for deploying and managing OpenCohort and Named Wallets**. Basic functionality required for initial setup is provided as script examples. If you'd like to add more features, feel free to refer to the [**contract**](#https://github.com/0xSilicon/opencohort-contracts) and [**API documentation**](#https://api-cohort.silicon.network/docs) provided in the "Information" section below and customize as needed.  
+
 
 ## Information
+- open cohort contracts: https://github.com/0xSilicon/opencohort-contracts
 - open cohort docs : https://docs.silicon.network/about/opencohort
 - open cohort api swagger : https://api-cohort.silicon.network/docs
 - silicon public endpoint : https://docs.silicon.network/user-guide/network
@@ -15,16 +49,10 @@ OpenCohort is a separate closely integrated with Silicon that categorizes users 
 ```
 cp .env.example .env
 ```
-2. Fill `.env` with PRIVATEKEY, SILICON, OPENCOHORT
+2. Fill `.env` with PRIVATE_KEY, SILICON, OPENCOHORT
 ```
-PRIVATEKEY: private key for cohort managing
-(ex, PRIVATEKEY=0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff )
-
-SILICON: silicon endpoint
-(mainnet: https://rpc.silicon.network, testnet: https://rpc-sepolia.silicon.network )
-
-OPENCOHORT: OpenCohort endpoint
-( mainnet: https://api-cohort.silicon.network, testnet: TBD )
+PRIVATE_KEY: private key for cohort managing
+(ex, PRIVATE_KEY=0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff )
 ```
 3. Install package
 ```
@@ -35,7 +63,7 @@ yarn or npm install
 node src/${script}
 ```
 
-## Methods Description
+## Open Cohort Methods Description
 ### Mint Cohort
 Script for minting a cohort item.
 To execute this script, ETH is required to cover the gas fees.
@@ -383,3 +411,95 @@ makeSubmitSnapshotHash(dto) {
 const dataHash = makeSubmitSnapshotHash(dto);
 const signingHash = makeEthereumSignedHash(dataHash);
 ```
+<br>
+<br>
+
+## Named Wallet Methods Description
+These scripts serve as examples for deploying or setting up the Named Wallet service. Since they are primarily used for sending transactions, you will need to ensure that **you have enough ETH to cover the gas fees**. For detailed explanations of the functions, please refer to the [link](#https://docs.silicon.network/about/opencohort/build-on-opencohort/developer/cohort).
+
+### Interacting with [`WalletFactory.sol`](#https://github.com/0xSilicon/opencohort-contracts/blob/main/contracts/namedWallet/WalletFactory.sol) 
+- Contract Address: `0x5F53CD20ecE6605c62a3525E1031b1d87Be05D80`
+  
+#### Deploy Wallet
+Send transaction for deploy Named Wallet. You can check the detailed information of the deployed Named Wallets by running the [001_checkWalletList.js](./src/wallet/signer/001_checkWalletList.js). 
+```
+function deployWallet(
+    address virtualAddress,
+    WalletInfo memory walletInfo,
+    string[] calldata keys,
+    string[] calldata values
+) external returns (address)
+```
+
+<br>
+
+#### Activate Wallet
+Send transaction to activate Named Wallet. The activateWallet function is used to activate a named wallet by associating a signer, virtual address, and owner with a valid signature. This operation ensures that the wallet is properly initialized and ready for use.
+```
+function activateWallet(
+    address signer,
+    address virtualAddress,
+    address owner,
+    bytes calldata signature
+) external
+```
+
+<br>
+
+### Interacting with [`NamedWallet.sol`](#https://github.com/0xSilicon/opencohort-contracts/blob/main/contracts/namedWallet/NamedWallet.sol)
+
+#### Add Property
+Send transaction to add properties to deployed Named Wallet. This function can only be executed by the account that deployed the Named Wallet, referred to as the signer.
+
+```
+function addPropertyBatch(string[] calldata keys, string[] calldata values) external onlySignerOrFactory
+```
+
+<br>
+
+#### Remove Property
+Send transaction to remove property to deployed Named Wallet.
+```
+function removeProperty(string calldata key) external onlySigner
+```
+
+<br>
+
+#### Change Info
+Send transaction to modify Named Wallet's metadata.
+```
+function changeInfo(string memory _name, string memory _image, string memory _description) external onlySigner
+```
+
+<br>
+
+#### Send Wallet Assets
+Send a transaction to execute these functions to transfer tokens, but they can only be used after activateWallet has been executed and the owner of the named wallet has been set.
+```
+function transferTo(address to, uint256 amount) public payable onlyOwner
+function transferTokenTo(address token, address to, uint256 amount) public onlyOwner
+```
+
+<br>
+
+#### Functions Not Included in the Examples
+- `WalletFactory.sol`
+```
+function computeAddress(address signer, address virtualAddress) external view returns (address) 
+function getSalt(address signer, address virtualAddress) external pure returns
+function getDataHash(address virtualAddress, address owner) external view returns (bytes32)
+```
+
+<br>
+
+- `NamedWallet.sol`
+```
+function changeTaxRate(uint256 rate_) external onlySigner
+```
+
+<br>
+<br>
+
+## Open Silicon Procotol Manager (Optional)
+The Open Silicon Protocol Manager streamlines the management of both Cohort and Named Wallet services, allowing users to deploy and manage them together in one place. By integrating these services, it simplifies the deployment process, reduces complexity, and ensures easier coordination and scalability across multiple accounts and configurations. A simple script is provided to [deploy](./src/optional/000_deployManagerContract.js) the Silicon Protocol Manager Contract and [execute](./src/optional/100_executeManagerContract.js) its functions.
+

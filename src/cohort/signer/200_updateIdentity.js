@@ -1,12 +1,13 @@
-const Utils = require('../lib/utils');
+require("module-alias/register");
+const { OPEN_COHORT_ENDPOINT } = require('@config');
+const Utils = require("@utils");
 const utils = new Utils();
 const request = require('request-promise');
 
 require("dotenv").config();
 
 (async() => {
-    const privateKey = process.env.PRIVATEKEY;
-    const openCohort = process.env.OPENCOHORT;
+    const privateKey = process.env.PRIVATE_KEY;
 
     /////////////////////////////////////////
     // CONFIG: signer & identity list
@@ -14,7 +15,7 @@ require("dotenv").config();
     const dto = {}
     /////////////////////////////////////////
 
-    const cohortConfig = JSON.parse(await request.get(`${openCohort}/cohort/config`)).data;
+    const cohortConfig = JSON.parse(await request.get(`${OPEN_COHORT_ENDPOINT}/cohort/config`)).data;
 
     const identities = {}
     const identityList = [];
@@ -51,7 +52,7 @@ require("dotenv").config();
     const signature = utils.signEC(privateKey, signingHash);
 
     let res = await request({
-        url: `${openCohort}/identity/update`,
+        url: `${OPEN_COHORT_ENDPOINT}/identity/update`,
         method: 'POST',
         body: {
             validUntil: validUntil,

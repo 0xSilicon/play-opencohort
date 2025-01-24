@@ -1,12 +1,13 @@
-const Utils = require('../lib/utils');
+require("module-alias/register");
+const { OPEN_COHORT_ENDPOINT } = require('./config');
+const Utils = require("@utils");
 const utils = new Utils();
 const request = require('request-promise');
 
 require("dotenv").config();
 
 (async() => {
-    const privateKey = process.env.PRIVATEKEY;
-    const openCohort = process.env.OPENCOHORT;
+    const privateKey = process.env.PRIVATE_KEY;
 
     //////////////////////////////////////////
     // CONFIG
@@ -14,7 +15,7 @@ require("dotenv").config();
     const memberDto = {}
     //////////////////////////////////////////
 
-    const cohortConfig = JSON.parse(await request.get(`${openCohort}/cohort/config`)).data;
+    const cohortConfig = JSON.parse(await request.get(`${OPEN_COHORT_ENDPOINT}/cohort/config`)).data;
 
     const addressList = Object.keys(memberDto);
     const weightList = [];
@@ -36,7 +37,7 @@ require("dotenv").config();
     const signature = utils.signEC(privateKey, signingHash);
 
     let res = await request({
-        url: `${openCohort}/cohort/${cohortId}/member/add`,
+        url: `${OPEN_COHORT_ENDPOINT}/cohort/${cohortId}/member/add`,
         method: 'POST',
         body: {
             validUntil: validUntil,
