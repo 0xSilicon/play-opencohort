@@ -12,6 +12,7 @@
     - Cohort Member Management (by Signer)
         - [Add Member](#add-member)
         - [Remove Member](#remove-member)
+        - [Remove All Members](#remove-all-members)
     - Snapshot for Airdrop (by Signer)
         - [Initialize Snapshot](#initialize-snapshot)
         - [Prepare Snapshot](#prepare-snapshot)
@@ -165,6 +166,40 @@ makeRemoveMembersHash(dto) {
     const dataBytes = defaultAbiCoder.encode(
         ['string', 'address', 'uint256', 'uint256', 'address[]', 'uint256'],
         ['OpenCohort:Remove', cohort, chainId, cohortId, members, validUntil]
+    );
+    return keccak256(dataBytes);
+}
+const dataHash = makeRemoveMembersHash(dto);
+const signingHash = makeEthereumSignedHash(dataHash);
+```
+---------------------------
+### Remove all members
+Remove an address from a specific cohort. If the address does not exist, ignore the request.
+- path: `/cohort/${cohortId}/member/remove/all`
+- method: `POST`
+- request body example
+```
+{
+  // Request expiration time ( seconds, ex, currentTimestamp + 300 )
+  "validUntil": 1234,
+
+  // Signature value for the request
+  "signature": "0xabcsafbasdb..."
+}
+```
+- signingHash
+```
+makeRemoveMembersHash(dto) {
+    const {
+        cohort,
+        chainId,
+        cohortId,
+        validUntil
+    } = dto;
+
+    const dataBytes = defaultAbiCoder.encode(
+        ['string', 'address', 'uint256', 'uint256', 'uint256'],
+        ['OpenCohort:Remove', cohort, chainId, cohortId, validUntil]
     );
     return keccak256(dataBytes);
 }
