@@ -18,7 +18,7 @@ const Web3 = require('web3');
     console.log(`owner: ${owner}`)
     const managerDeployer = await utils.getManagerDeployer(managerDeployerAddress);
 
-    const managerAddress = await managerDeployer.methods.siliconProtocolManager(owner).call();
+    const managerAddress = process.env.MANAGER_ADDRESS;
     console.log(`* Manager Address deployed by ${owner}: ${managerAddress}`);
 
     const node = new Web3(SILICON_RPC);
