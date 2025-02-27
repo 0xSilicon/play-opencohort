@@ -1,5 +1,5 @@
 require("module-alias/register");
-const { OPEN_COHORT_ENDPOINT } = require('./config');
+const { OPEN_COHORT_ENDPOINT } = require('@config');
 const Utils = require("@utils");
 const utils = new Utils();
 const request = require('request-promise');
