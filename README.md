@@ -352,6 +352,7 @@ const signingHash = makeEthereumSignedHash(dataHash);
       "merkleRoot":"0xd0e15e9b115375b9725e57604121792e871db3128dc0c5683601d8288f755930",
       "timestamp":1718266039, // snapshot time (For rollup, return the value exactly as requested in the request)
       "prover":"https://api-cohort.silicon.network",
+      "totalCount":1234
       "totalWeight":10000000,
       "nonce":1, // snapshot nonce
     },
