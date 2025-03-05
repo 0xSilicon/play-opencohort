@@ -64,7 +64,7 @@ const Web3 = require('web3');
 
     const signedTx = await node.eth.accounts.signTransaction(txData, privateKey);
     const tx = await node.eth.sendSignedTransaction(signedTx.rawTransaction);
-    console.log(`mintCohort: ${tx.transactionHash}`);
+    console.log(`upgrade Cohort: ${tx.transactionHash}`);
 
     console.log(`new version: ${await manager.methods.version().call()}`)
 })();
