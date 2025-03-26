@@ -1,4 +1,5 @@
 require('module-alias/register');
+const { OPEN_COHORT_ENDPOINT } = require('@config');
 const Utils = require("@utils");
 const utils = new Utils();
 const request = require('request-promise');
@@ -16,7 +17,7 @@ require("dotenv").config();
         let methodParams = []; // Parameters for the contract method
 
         // Example 1: Using the setSigner Function
-        // The setSigner function allows the owner to set the validity of a signer. 
+        // The setSigner function allows the owner to set the validity of a signer.
         //
         // Example Usage:
         // let methodName = "setSigner";
@@ -29,10 +30,10 @@ require("dotenv").config();
         // let methodName = "setCohortGrant";
         // let methodParams = [123, { rate: 500, grantee: "0xGranteeAddressHere" }];
         /////////////////////////////////////////
-        
+
         const config = JSON.parse(await request.get(`${OPEN_COHORT_ENDPOINT}/common/config`)).data;
         const managerDeployerAddress = config.SiliconProtocolManagerDeployer;
-        
+
         const owner = await utils.getAccount(process.env.PRIVATE_KEY);
         const managerDeployer = await utils.getManagerDeployer(managerDeployerAddress);
 
@@ -41,7 +42,6 @@ require("dotenv").config();
 
         const manager = await utils.getManager(managerAddress);
 
-        
         const gasPrice = parseInt(parseInt(await utils.node.eth.getGasPrice()) * 1.5);
         const gasLimit = parseInt(await manager.methods[methodName](...methodParams).estimateGas({from: owner.address, to: managerDeployerAddress}) * 1.2);
 
