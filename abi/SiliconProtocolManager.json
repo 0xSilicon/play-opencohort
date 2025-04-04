@@ -794,6 +794,36 @@
     {
         "inputs": [
             {
+                "components": [
+                    {
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "description",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "image",
+                        "type": "string"
+                    }
+                ],
+                "internalType": "struct IOpenNameTag.NameTagMetadata",
+                "name": "nameTagMetadata",
+                "type": "tuple"
+            }
+        ],
+        "name": "setNameTagMetadata",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "signer",
                 "type": "address"
@@ -869,6 +899,34 @@
         "name": "upgradeToAndCall",
         "outputs": [],
         "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "virtualAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "newImplementation",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            },
+            {
+                "internalType": "bytes",
+                "name": "signature",
+                "type": "bytes"
+            }
+        ],
+        "name": "upgradeWalletImplementation",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
